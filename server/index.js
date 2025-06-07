@@ -3,12 +3,16 @@
 const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
 const config = require("./config/default");
-const path = require('path'); 
+const path = require("path");
 
 const init = async () => {
   const server = Hapi.server({
     port: config.port,
-    host: "localhost",
+    host: "0.0.0.0",
+    tls: {
+      key: fs.readFileSync("/home/ec2-user/ssl/key.pem"),
+      cert: fs.readFileSync("/home/ec2-user/ssl/cert.pem"),
+    },
   });
 
   await server.register(require("@hapi/inert"));
@@ -23,7 +27,6 @@ const init = async () => {
       },
     },
   });
-
 
   await server.start();
   console.log(`Server running on ${server.info.uri}`);
