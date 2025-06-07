@@ -4,6 +4,7 @@ const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
 const config = require("./config/default");
 const path = require("path");
+const fs = require("fs");
 
 const init = async () => {
   const server = Hapi.server({
