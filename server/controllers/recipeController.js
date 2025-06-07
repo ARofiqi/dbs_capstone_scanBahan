@@ -39,8 +39,7 @@ async function createRecipe(request, h) {
     const recipe = await recipeService.createRecipe(recipeData);
     return h.response({ status: "success", data: recipe }).code(201);
   } catch (err) {
-    return h.response({ status: "success", data: recipe }).code(201);
-    // return h.response(formatError(err.message)).code(err.output?.statusCode || 500);
+    return h.response(formatError(err.message)).code(err.output?.statusCode || 500);
   }
 }
 
