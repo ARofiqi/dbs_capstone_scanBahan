@@ -1,11 +1,11 @@
 module.exports = {
   apps: [{
-    name: 'scanbahan',
-    script: 'index.js',
+    name: 'hapi-production',
+    script: 'app.js',
     env: {
       NODE_ENV: 'production'
     },
-    error_file: '/var/log/hapi-error.log',
-    out_file: '/var/log/hapi-out.log'
+    error_file: "/home/ec2-user/logs/hapi-error.log",  
+    out_file: "/home/ec2-user/logs/hapi-out.log"       
   }]
 };
