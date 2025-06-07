@@ -9,11 +9,11 @@ const fs = require("fs");
 const init = async () => {
   const server = Hapi.server({
     port: config.port,
-    host: "0.0.0.0",
-    tls: {
+    host: "localhost",
+    tls: process.env.NODE_ENV === 'production' ? {
       key: fs.readFileSync("/home/ec2-user/ssl/key.pem"),
       cert: fs.readFileSync("/home/ec2-user/ssl/cert.pem"),
-    },
+    } : null,
   });
 
   await server.register(require("@hapi/inert"));
