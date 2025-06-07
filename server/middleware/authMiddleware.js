@@ -6,14 +6,15 @@ const Boom = require("@hapi/boom");
 async function authMiddleware(request, h) {
   try {
     const authHeader = request.headers.authorization;
+
     if (!authHeader) {
       throw Boom.unauthorized("Missing authorization header");
     }
 
     const token = authHeader.replace("Bearer ", "");
+    
     const decoded = verifyToken(token);
-
-    // Attach user info ke request.auth.credentials
+    
     request.auth = {
       isAuthenticated: true,
       credentials: decoded,

@@ -5,7 +5,6 @@ const { hashPassword, comparePassword, generateToken } = require("../utils/authU
 const Boom = require("@hapi/boom");
 
 async function registerUser({ fullname, username, email, password, photo }) {
-  // Cek apakah email sudah terdaftar
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) {
     throw Boom.conflict("Email sudah terdaftar");
@@ -23,7 +22,6 @@ async function registerUser({ fullname, username, email, password, photo }) {
     },
   });
 
-  // Jangan return password
   delete user.password;
 
   return user;
@@ -40,9 +38,9 @@ async function loginUser({ email, password }) {
     throw Boom.unauthorized("Email atau password salah");
   }
 
-  const token = generateToken({ id: user.id, email: user.email, username: user.username });
+  const token = generateToken({ id: user.id, email: user.email, username: user.username, role: user.role });
 
-  return { token, user: { id: user.id, fullname: user.fullname, username: user.username, email: user.email, photo: user.photo } };
+  return { token, user: { id: user.id, fullname: user.fullname, username: user.username, email: user.email, photo: user.photo, role: user.role } };
 }
 
 module.exports = {

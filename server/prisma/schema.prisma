@@ -18,6 +18,7 @@ model User {
   photo     String?
   fullname  String
   username  String
+  role      String    @default("USER") // USER, ADMIN
   email     String    @unique
   password  String
   createdAt DateTime  @default(now())

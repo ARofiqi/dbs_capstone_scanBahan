@@ -4,6 +4,7 @@ CREATE TABLE "User" (
     "photo" TEXT,
     "fullname" TEXT NOT NULL,
     "username" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'USER',
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

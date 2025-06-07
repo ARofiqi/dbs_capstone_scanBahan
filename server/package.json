@@ -5,17 +5,24 @@
   "main": "index.js",
   "scripts": {
     "dev": "node index.js",
-    "dev:nodemon": "nodemon index.js"
+    "dev:nodemon": "nodemon index.js",
+    "seed:admin": "node seeders/adminSeeder.js",
+    "seed:recipe": "node seeders/recipeSeeder.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "@hapi/hapi": "^21.4.0",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/jwt": "^3.2.0",
     "@prisma/client": "^6.8.2",
     "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
+    "hapi-auth-jwt2": "^11.0.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.0",
