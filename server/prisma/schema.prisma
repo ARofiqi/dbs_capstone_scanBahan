@@ -22,26 +22,33 @@ model User {
   email     String    @unique
   password  String
   createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   favorites Favorite[]
 }
 
 model Recipe {
-  id           String          @id @default(uuid())
-  title        String
-  ingredients  String
-  steps        String
-  image        String?
-  loves        Int             @default(0)
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  id                  Int             @id @default(autoincrement())
+  title               String
+  ingredients         String
+  steps               String
+  image               String?
+  loves               Int             @default(0)
+  url                 String
+  category            String
+  title_cleaned       String
+  total_ingredients   Int
+  ingredients_cleaned String
+  total_steps         Int
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
 
   favorites   Favorite[]
 }
 
 model Favorite {
   userId   String
-  recipeId String
+  recipeId Int
 
   user     User    @relation(fields: [userId], references: [id])
   recipe   Recipe  @relation(fields: [recipeId], references: [id])

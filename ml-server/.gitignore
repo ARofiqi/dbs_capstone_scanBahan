@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# VSCode settings
+.vscode/
+
+# Python env + dependencies
+*.egg-info/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Unit test / coverage
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache/
+.cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# mypy / pyright
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# Gunicorn / Uvicorn logs
+gunicorn-access.log
+gunicorn-error.log
+
+# dotenv
+.env
+.env.*
+
+# PyCharm
+.idea/
+
+# SQLite (if used locally)
+*.sqlite3
+*.db
+
+# Docker
+*.pid

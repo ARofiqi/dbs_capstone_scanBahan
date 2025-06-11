@@ -4,7 +4,6 @@ const prisma = require("./prismaClient");
 const Boom = require("@hapi/boom");
 
 async function addFavorite(userId, recipeId) {
-  // Cek apakah favorite sudah ada
   const existing = await prisma.favorite.findUnique({
     where: {
       userId_recipeId: { userId, recipeId },
@@ -20,7 +19,6 @@ async function addFavorite(userId, recipeId) {
 }
 
 async function removeFavorite(userId, recipeId) {
-  // Cek apakah favorite ada
   const existing = await prisma.favorite.findUnique({
     where: {
       userId_recipeId: { userId, recipeId },

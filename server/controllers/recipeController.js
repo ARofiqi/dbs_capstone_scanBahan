@@ -5,7 +5,6 @@ const { formatError } = require("../utils/errorUtils");
 const path = require("path");
 const fs = require("fs");
 const { promisify } = require("util");
-const { log } = require("console");
 
 const writeFile = promisify(fs.writeFile);
 const unlink = promisify(fs.unlink);

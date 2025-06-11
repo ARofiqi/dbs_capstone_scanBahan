@@ -3,31 +3,23 @@
 const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
 const config = require("./config/default");
-const path = require("path");
-// const fs = require("fs");
 
 const init = async () => {
+  
   const server = Hapi.server({
     port: config.port,
     host: "localhost",
-  });
-  // tls: process.env.NODE_ENV === 'production' ? {
-  //   key: fs.readFileSync("/home/ec2-user/ssl/key.pem"),
-  //   cert: fs.readFileSync("/home/ec2-user/ssl/cert.pem"),
-  // } : null,
-
-  await server.register(require("@hapi/inert"));
-
-  server.route(routes);
-  server.route({
-    method: "GET",
-    path: "/uploads/{param*}",
-    handler: {
-      directory: {
-        path: path.join(__dirname, "../uploads"),
+    routes: {
+      cors: {
+        origin: ["*"],
+        headers: ["Accept", "Content-Type"],
+        additionalHeaders: ["X-Requested-With"],
       },
     },
   });
+  await server.register(require("@hapi/inert"));
+
+  server.route(routes);
 
   await server.start();
   console.log(`Server running on ${server.info.uri}`);
