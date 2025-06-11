@@ -11,9 +11,10 @@ async function importExcel() {
     const sheet = workbook.Sheets[sheetName];
     const results = xlsx.utils.sheet_to_json(sheet);
 
-    const limitedResults = results.slice(0, 10000);
+    // const limitedResults = results.slice(0, 10000);
+    // console.log(`Total data dibaca: ${results.length}, akan diproses: ${limitedResults.length}`);
     console.log(`Total data dibaca: ${results.length}, akan diproses: ${limitedResults.length}`);
-
+    
     for (const item of results) {
       if (item.Title && item.Ingredients && item.Steps && item.URL && item.Category && item.TitleCleaned && item.TotalIngredients !== undefined && item.IngredientsCleaned && item.TotalSteps !== undefined) {
         try {
@@ -39,7 +40,7 @@ async function importExcel() {
         console.warn("❗ Melewatkan data tidak lengkap:", item.Title || "[Tanpa Judul]");
       }
     }
-
+    
     console.log(`✅ Import berhasil: ${limitedResults.length} data dimasukkan`);
   } catch (err) {
     console.error("❌ Gagal mengimpor:", err);
