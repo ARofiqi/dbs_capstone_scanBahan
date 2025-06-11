@@ -34,7 +34,7 @@ model Recipe {
   steps               String
   image               String?
   loves               Int             @default(0)
-  url                 String
+  url                 String?
   category            String
   title_cleaned       String
   total_ingredients   Int
@@ -54,4 +54,12 @@ model Favorite {
   recipe   Recipe  @relation(fields: [recipeId], references: [id])
 
   @@id([userId, recipeId])
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
 }

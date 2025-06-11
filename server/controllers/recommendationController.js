@@ -3,12 +3,13 @@
 const axios = require("axios");
 const { formatError } = require("../utils/errorUtils");
 const recipeService = require("../services/recipeService");
+const config = require("../config/default");
 
 async function getRecommendation(request, h) {
   try {
     const ingredients = request.payload.ingredients || [];
 
-    const response = await axios.post("http://localhost:8000/find-similar-recipes", {
+    const response = await axios.post(config.urlMachineLearning + "/find-similar-recipes", {
       ingredients: ingredients,
     });
 

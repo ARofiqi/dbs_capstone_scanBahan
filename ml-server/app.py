@@ -9,9 +9,9 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # Load environment from .env file
+load_dotenv()
 
-RECIPE_BACKEND_URL = os.getenv("RECIPE_BACKEND_URL", "http://localhost:3000")  # default fallback
+RECIPE_BACKEND_URL = os.getenv("RECIPE_BACKEND_URL", "http://localhost:3000")
 
 app = FastAPI()
 

@@ -21,7 +21,7 @@ CREATE TABLE "Recipe" (
     "steps" TEXT NOT NULL,
     "image" TEXT,
     "loves" INTEGER NOT NULL DEFAULT 0,
-    "url" TEXT NOT NULL,
+    "url" TEXT,
     "category" TEXT NOT NULL,
     "title_cleaned" TEXT NOT NULL,
     "total_ingredients" INTEGER NOT NULL,
@@ -39,6 +39,17 @@ CREATE TABLE "Favorite" (
     "recipeId" INTEGER NOT NULL,
 
     CONSTRAINT "Favorite_pkey" PRIMARY KEY ("userId","recipeId")
+);
+
+-- CreateTable
+CREATE TABLE "Feedback" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Feedback_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
