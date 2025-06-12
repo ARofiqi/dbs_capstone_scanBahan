@@ -81,6 +81,10 @@ module.exports = [
           data: userSchemas.baseUser,
         }),
       },
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
   {
@@ -105,7 +109,10 @@ module.exports = [
           }),
         }),
       },
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
 ];
-

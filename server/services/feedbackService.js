@@ -21,10 +21,26 @@ async function deleteFeedbackById(id) {
   });
 }
 
-async function getAllFeedback() {
-  return await prisma.feedback.findMany({
-    orderBy: { createdAt: 'desc' },
-  });
+async function getAllFeedback({ page, limit, search }) {
+  const skip = (page - 1) * limit;
+
+  const whereClause = {
+    OR: [{ name: { contains: search, mode: "insensitive" } }, { message: { contains: search, mode: "insensitive" } }],
+  };
+
+  const [data, total] = await Promise.all([
+    prisma.feedback.findMany({
+      where: search ? whereClause : undefined,
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: limit,
+    }),
+    prisma.feedback.count({
+      where: search ? whereClause : undefined,
+    }),
+  ]);
+
+  return { data, total };
 }
 
 module.exports = {

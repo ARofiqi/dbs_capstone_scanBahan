@@ -10,6 +10,10 @@ module.exports = [
     handler: favoriteController.getUserFavorites,
     options: {
       pre: [{ method: authMiddleware }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
   {
@@ -18,6 +22,10 @@ module.exports = [
     handler: favoriteController.addFavorite,
     options: {
       pre: [{ method: authMiddleware }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
   {
@@ -26,6 +34,10 @@ module.exports = [
     handler: favoriteController.removeFavorite,
     options: {
       pre: [{ method: authMiddleware }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
 ];

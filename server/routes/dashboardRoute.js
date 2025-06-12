@@ -11,6 +11,10 @@ module.exports = [
     handler: recipeController.getAllRecipes,
     options: {
       pre: [{ method: authMiddleware }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
   {
@@ -19,6 +23,10 @@ module.exports = [
     handler: recipeController.getRecipeById,
     options: {
       pre: [{ method: authMiddleware }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
   {
@@ -27,6 +35,10 @@ module.exports = [
     handler: recipeController.createRecipe,
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
       payload: {
         maxBytes: 5 * 1024 * 1024,
         output: "stream",
@@ -42,6 +54,10 @@ module.exports = [
     handler: recipeController.updateRecipe,
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
       payload: {
         maxBytes: 5 * 1024 * 1024,
         output: "stream",
@@ -57,6 +73,10 @@ module.exports = [
     handler: recipeController.deleteRecipe,
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+      cors: {
+        origin: ["*"],
+        additionalHeaders: ["X-Requested-With"],
+      },
     },
   },
 ];

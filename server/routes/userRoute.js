@@ -1,14 +1,14 @@
 "use strict";
 
-const feedbackController = require("../controllers/feedbackController");
+const userController = require("../controllers/userController");
 const authMiddleware = require("../middleware/authMiddleware");
 const { checkRole, roles } = require("../middleware/role");
 
 module.exports = [
   {
     method: "GET",
-    path: "/feedback",
-    handler: feedbackController.getAllFeedback,
+    path: "/users",
+    handler: userController.getAllUsers,
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
       cors: {
@@ -18,28 +18,30 @@ module.exports = [
     },
   },
   {
-    method: "GET",
-    path: "/feedback/{id}",
-    handler: feedbackController.getFeedback,
+    method: "PUT",
+    path: "/users/{id}",
+    handler: userController.updateUser,
     options: {
-      pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+      pre: [{ method: authMiddleware }, { method: checkRole([roles.USER]) }],
       cors: {
         origin: ["*"],
         additionalHeaders: ["X-Requested-With"],
       },
+      payload: {
+        output: "stream",
+        parse: true,
+        multipart: true,
+        allow: "multipart/form-data",
+        maxBytes: 10 * 1024 * 1024,
+      },
     },
-  },
-  {
-    method: "POST",
-    path: "/feedback",
-    handler: feedbackController.sendFeedback,
   },
   {
     method: "DELETE",
-    path: "/feedback/{id}",
-    handler: feedbackController.deleteFeedback,
+    path: "/users/{id}",
+    handler: userController.deleteUser,
     options: {
-      pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+      pre: [{ method: authMiddleware }, { method: checkRole([roles.USER]) }],
       cors: {
         origin: ["*"],
         additionalHeaders: ["X-Requested-With"],

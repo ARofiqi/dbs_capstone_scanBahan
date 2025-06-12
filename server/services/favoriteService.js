@@ -35,12 +35,37 @@ async function removeFavorite(userId, recipeId) {
   });
 }
 
-async function getUserFavorites(userId) {
-  return await prisma.favorite.findMany({
-    where: { userId },
-    include: { recipe: true },
-  });
+async function getUserFavorites(userId, { search = "", page = 1, limit = 10 }) {
+  const skip = (page - 1) * limit;
+
+  const whereClause = {
+    userId,
+    recipe: {
+      title: {
+        contains: search,
+        mode: "insensitive",
+      },
+    },
+  };
+
+  const [favorites, total] = await Promise.all([
+    prisma.favorite.findMany({
+      where: whereClause,
+      skip,
+      take: limit,
+      include: { recipe: true },
+    }),
+    prisma.favorite.count({ where: whereClause }),
+  ]);
+
+  return {
+    favorites,
+    page,
+    totalPages: Math.ceil(total / limit),
+    totalItems: total,
+  };
 }
+
 
 module.exports = {
   addFavorite,

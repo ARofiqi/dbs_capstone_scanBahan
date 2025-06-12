@@ -36,12 +36,23 @@ async function sendFeedback(request, h) {
 
 async function getAllFeedback(request, h) {
   try {
-    const results = await feedbackService.getAllFeedback();
+    const { page = 1, limit = 10, search = "" } = request.query;
+
+    const results = await feedbackService.getAllFeedback({
+      page: parseInt(page),
+      limit: parseInt(limit),
+      search: search.toLowerCase(),
+    });
 
     return h
       .response({
         status: "success",
-        data: results,
+        data: results.data,
+        meta: {
+          total: results.total,
+          page,
+          limit,
+        },
       })
       .code(200);
   } catch (err) {

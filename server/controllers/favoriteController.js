@@ -28,12 +28,28 @@ async function removeFavorite(request, h) {
 async function getUserFavorites(request, h) {
   try {
     const userId = request.auth.credentials.id;
-    const favorites = await favoriteService.getUserFavorites(userId);
-    return h.response({ status: "success", data: favorites });
+    const { search = "", page = 1, limit = 10 } = request.query;
+
+    const result = await favoriteService.getUserFavorites(userId, {
+      search,
+      page: parseInt(page),
+      limit: parseInt(limit),
+    });
+
+    return h.response({
+      status: "success",
+      data: result.favorites,
+      meta: {
+        page: result.page,
+        totalPages: result.totalPages,
+        totalItems: result.totalItems,
+      },
+    });
   } catch (err) {
     return h.response(formatError(err.message)).code(500);
   }
 }
+
 
 module.exports = {
   addFavorite,
