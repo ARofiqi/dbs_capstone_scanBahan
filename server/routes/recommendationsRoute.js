@@ -2,7 +2,7 @@
 
 const recommendationControllers = require("../controllers/recommendationController");
 
-const routes = [
+module.exports = [
   {
     method: "POST",
     path: "/recommendation",
@@ -14,5 +14,3 @@ const routes = [
     handler: recommendationControllers.getRecipesForRecomendation,
   },
 ];
-
-module.exports = routes;

@@ -17,7 +17,7 @@ async function addFavorite(request, h) {
 async function removeFavorite(request, h) {
   try {
     const userId = request.auth.credentials.id;
-    const recipeId = request.params.recipeId;
+    const recipeId = parseInt(request.params.recipeId);
     await favoriteService.removeFavorite(userId, recipeId);
     return h.response({ status: "success", message: "Favorite berhasil dihapus" });
   } catch (err) {

@@ -3,27 +3,45 @@
 const prisma = require("./prismaClient");
 const Boom = require("@hapi/boom");
 
-async function createRecipe({ title, ingredients, steps, image, url, category, title_cleaned, total_ingredients, ingredients_cleaned, total_steps }) {
+async function createRecipe({ title, ingredients, steps, imageUrl, url, category, title_cleaned, total_ingredients, ingredients_cleaned, total_steps }) {
   return await prisma.recipe.create({
     data: {
       title,
       ingredients,
       steps,
-      image,
+      image: imageUrl,
       url,
       category,
       title_cleaned,
-      total_ingredients,
+      total_ingredients: parseInt(total_ingredients),
       ingredients_cleaned,
-      total_steps,
+      total_steps: parseInt(total_steps),
     },
   });
 }
 
-async function getAllRecipes() {
-  return await prisma.recipe.findMany({
+async function findManyRecipes({ limit, offset, search }) {
+  const whereClause = search
+    ? {
+        title: {
+          contains: search,
+          mode: "insensitive",
+        },
+      }
+    : {};
+
+  const recipes = await prisma.recipe.findMany({
+    skip: offset,
+    take: limit,
+    where: whereClause,
     orderBy: { createdAt: "desc" },
   });
+
+  const total = await prisma.recipe.count({
+    where: whereClause,
+  });
+
+  return { recipes, total };
 }
 
 async function getAllRecipesForRecomendation() {
@@ -38,50 +56,62 @@ async function getAllRecipesForRecomendation() {
 }
 
 async function getRecipeById(id) {
-  const recipe = await prisma.recipe.findUnique({ where: { id } });
+  const recipe = await prisma.recipe.findUnique({ where: { id: parseInt(id) } });
   if (!recipe) {
     throw Boom.notFound("Recipe tidak ditemukan");
   }
   return recipe;
 }
 
-async function updateRecipe(id, { title, ingredients, steps, image, url, category, title_cleaned, total_ingredients, ingredients_cleaned, total_steps }) {
-  const recipe = await prisma.recipe.findUnique({ where: { id } });
+async function updateRecipe(id, { title, ingredients, steps, imageUrl, url, category, title_cleaned, total_ingredients, ingredients_cleaned, total_steps }) {
+  const recipe = await prisma.recipe.findUnique({ where: { id: parseInt(id) } });
   if (!recipe) {
     throw Boom.notFound("Recipe tidak ditemukan");
   }
 
   return await prisma.recipe.update({
-    where: { id },
+    where: { id: parseInt(id) },
     data: {
       title,
       ingredients,
       steps,
-      image,
+      image: imageUrl,
       url,
       category,
       title_cleaned,
-      total_ingredients,
+      total_ingredients: parseInt(total_ingredients),
       ingredients_cleaned,
-      total_steps,
+      total_steps: parseInt(total_steps),
     },
   });
 }
 
 async function deleteRecipe(id) {
-  const recipe = await prisma.recipe.findUnique({ where: { id } });
+  const recipe = await prisma.recipe.findUnique({ where: { id: parseInt(id) } });
   if (!recipe) {
     throw Boom.notFound("Recipe tidak ditemukan");
   }
 
-  return await prisma.recipe.delete({ where: { id } });
+  return await prisma.recipe.delete({ where: { id: parseInt(id) } });
+}
+
+async function getRecipesByIds(ids) {
+  const recipes = await prisma.recipe.findMany({
+    where: {
+      id: {
+        in: ids,
+      },
+    },
+  });
+  return recipes;
 }
 
 module.exports = {
   createRecipe,
-  getAllRecipes,
+  findManyRecipes,
   getRecipeById,
   updateRecipe,
   deleteRecipe,
-  getAllRecipesForRecomendation
+  getAllRecipesForRecomendation,
+  getRecipesByIds,
 };

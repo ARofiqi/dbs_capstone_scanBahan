@@ -61,7 +61,7 @@ const formatValidationError = (err) => {
   }));
 };
 
-const authRoutes = [
+module.exports = [
   {
     method: "POST",
     path: "/auth/register",
@@ -109,4 +109,3 @@ const authRoutes = [
   },
 ];
 
-module.exports = authRoutes;

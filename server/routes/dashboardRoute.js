@@ -28,7 +28,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
       payload: {
-        maxBytes: 10 * 1024 * 1024, // 10MB max file size
+        maxBytes: 5 * 1024 * 1024,
         output: "stream",
         parse: true,
         multipart: true,
@@ -43,7 +43,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
       payload: {
-        maxBytes: 10 * 1024 * 1024, // 10MB max file size
+        maxBytes: 5 * 1024 * 1024,
         output: "stream",
         parse: true,
         multipart: true,

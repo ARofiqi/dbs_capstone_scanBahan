@@ -13,7 +13,7 @@ async function importExcel() {
 
     // const limitedResults = results.slice(0, 10000);
     // console.log(`Total data dibaca: ${results.length}, akan diproses: ${limitedResults.length}`);
-    console.log(`Total data dibaca: ${results.length}, akan diproses: ${limitedResults.length}`);
+    console.log(`Total data dibaca: ${results.length}`);
     
     for (const item of results) {
       if (item.Title && item.Ingredients && item.Steps && item.URL && item.Category && item.TitleCleaned && item.TotalIngredients !== undefined && item.IngredientsCleaned && item.TotalSteps !== undefined) {
@@ -41,7 +41,7 @@ async function importExcel() {
       }
     }
     
-    console.log(`✅ Import berhasil: ${limitedResults.length} data dimasukkan`);
+    console.log(`✅ Import berhasil: ${results.length} data dimasukkan`);
   } catch (err) {
     console.error("❌ Gagal mengimpor:", err);
   } finally {

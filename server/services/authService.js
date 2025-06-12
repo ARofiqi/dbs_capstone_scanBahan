@@ -9,7 +9,6 @@ async function registerUser({ fullname, username, email, password, photo }) {
   if (existingUser) {
     throw Boom.conflict("Email sudah terdaftar");
   }
-
   const hashedPassword = await hashPassword(password);
 
   const user = await prisma.user.create({
@@ -22,9 +21,15 @@ async function registerUser({ fullname, username, email, password, photo }) {
     },
   });
 
-  delete user.password;
-
-  return user;
+  return {
+    id: user.id,
+    fullname: user.fullname,
+    username: user.username,
+    role: user.role,
+    email: user.email,
+    photo: user.photo,
+    createdAt: user.createdAt,
+  };
 }
 
 async function loginUser({ email, password }) {

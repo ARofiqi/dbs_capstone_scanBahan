@@ -44,8 +44,27 @@ async function createRecipe(request, h) {
 
 async function getAllRecipes(request, h) {
   try {
-    const recipes = await recipeService.getAllRecipes();
-    return h.response({ status: "success", data: recipes });
+    const { page = 1, limit = 10, search = "" } = request.query;
+    const pageNumber = parseInt(page);
+    const limitNumber = parseInt(limit);
+    const offset = (pageNumber - 1) * limitNumber;
+
+    const { recipes, total } = await recipeService.findManyRecipes({
+      limit: limitNumber,
+      offset,
+      search,
+    });
+
+    return h.response({
+      status: "success",
+      data: recipes,
+      pagination: {
+        total,
+        page: pageNumber,
+        limit: limitNumber,
+        totalPages: Math.ceil(total / limitNumber),
+      },
+    });
   } catch (err) {
     return h.response(formatError(err.message)).code(500);
   }
