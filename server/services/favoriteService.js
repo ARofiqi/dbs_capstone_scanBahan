@@ -9,7 +9,7 @@ async function addFavorite(userId, recipeId) {
       userId_recipeId: { userId, recipeId },
     },
   });
-  if (existing) {
+  if (!existing) {
     throw Boom.conflict("Recipe sudah ada di favorite");
   }
 

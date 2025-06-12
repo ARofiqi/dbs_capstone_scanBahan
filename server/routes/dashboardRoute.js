@@ -10,7 +10,7 @@ module.exports = [
     path: "/recipes",
     handler: recipeController.getAllRecipes,
     options: {
-      pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+      pre: [{ method: authMiddleware }],
     },
   },
   {
@@ -18,7 +18,7 @@ module.exports = [
     path: "/recipes/{id}",
     handler: recipeController.getRecipeById,
     options: {
-      pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+      pre: [{ method: authMiddleware }],
     },
   },
   {

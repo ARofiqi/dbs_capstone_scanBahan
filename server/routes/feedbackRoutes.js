@@ -4,23 +4,32 @@ const feedbackController = require("../controllers/feedbackController");
 
 module.exports = [
   {
-    method: "POST",
+    method: "GET",
     path: "/feedback",
-    handler: feedbackController.sendFeedback,
+    handler: feedbackController.getAllFeedback,
+    options: {
+      pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+    },
   },
   {
     method: "GET",
     path: "/feedback/{id}",
     handler: feedbackController.getFeedback,
+    options: {
+      pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+    },
+  },
+  {
+    method: "POST",
+    path: "/feedback",
+    handler: feedbackController.sendFeedback,
   },
   {
     method: "DELETE",
     path: "/feedback/{id}",
     handler: feedbackController.deleteFeedback,
-  },
-  {
-    method: "GET",
-    path: "/feedback",
-    handler: feedbackController.getAllFeedback,
+    options: {
+      pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
+    },
   },
 ];
