@@ -12,7 +12,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },
@@ -24,7 +24,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },
@@ -36,7 +36,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
       payload: {
@@ -55,7 +55,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
       payload: {
@@ -74,7 +74,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }, { method: checkRole([roles.ADMIN]) }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },

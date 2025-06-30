@@ -11,7 +11,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },
@@ -23,7 +23,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },
@@ -35,7 +35,7 @@ module.exports = [
     options: {
       pre: [{ method: authMiddleware }],
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },

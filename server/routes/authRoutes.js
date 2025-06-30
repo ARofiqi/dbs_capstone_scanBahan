@@ -82,7 +82,7 @@ module.exports = [
         }),
       },
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },
@@ -110,7 +110,7 @@ module.exports = [
         }),
       },
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         additionalHeaders: ["X-Requested-With"],
       },
     },

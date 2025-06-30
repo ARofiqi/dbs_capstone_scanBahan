@@ -5,13 +5,12 @@ const routes = require("./routes");
 const config = require("./config/default");
 
 const init = async () => {
-  
   const server = Hapi.server({
     port: config.port,
     host: "0.0.0.0",
     routes: {
       cors: {
-        origin: ["*"],
+        origin: ["https://mirahrinjani.online"],
         headers: ["Accept", "Content-Type"],
         additionalHeaders: ["X-Requested-With"],
       },
